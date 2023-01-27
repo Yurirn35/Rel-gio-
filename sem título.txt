@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Relógio</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="clock"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
+
+#clock {
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+  margin: 50px auto;
+}
+function updateClock() {
+  var currentTime = new Date();
+  var currentHours = currentTime.getHours();
+  var currentMinutes = currentTime.getMinutes();
+  var currentSeconds = currentTime.getSeconds();
+
+  // Adicionar um zero à frente das unidades
+  currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
+  currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
+
+  // Escolha AM ou PM
+  var timeOfDay = (currentHours < 12) ? "AM" : "PM";
+
+  // 0 - 11 : AM, 12 - 23 : PM
+  currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
+
+  // 0 : 12
+  currentHours = (currentHours == 0) ? 12 : currentHours;
+
+  // Montar a string da hora
+  var currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
+
+  // Atualizar o relógio
+  document.getElementById("clock").innerHTML = currentTimeString;
+}
+
+setInterval(updateClock, 1000);
